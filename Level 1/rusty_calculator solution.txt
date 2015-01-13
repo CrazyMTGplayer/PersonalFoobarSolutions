@@ -1,0 +1,25 @@
+def answer(str):
+    output = []
+    stack = []
+    work = list(str)
+    for stream in work:
+        if stream == "*" or stream == "+":
+            if stack and stream == "+" and stack[len(stack) - 1] == "*":
+                length = len(stack)
+                for i in range(length):
+                    tmp = stack.pop()
+                    if tmp == "*":
+                        output.append(tmp)
+                    else:
+                        stack.append(tmp)
+                
+            stack.append(stream)
+        
+        elif stream.isdigit():
+            output.append(stream)
+    
+    length = len(stack)        
+    for i in range(length):
+        output.append(stack.pop())
+            
+    print "".join(output)
